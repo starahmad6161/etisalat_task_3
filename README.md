@@ -3,10 +3,6 @@
 
 https://movie-6161.web.app/
 
-## GitHub repo
-
-https://github.com/starahmad6161/etisalat_task_3
-
 ## Description
 **Using TheMovieDB API: **
 
