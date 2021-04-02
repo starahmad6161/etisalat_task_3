@@ -11,6 +11,7 @@ https://github.com/starahmad6161/etisalat_task_3
 **Using TheMovieDB API: **
 
 https://www.themoviedb.org/documentation/api
+
 **Build a web app using the following:**
 - Angular
 - Firebase as a backend
