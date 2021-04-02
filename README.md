@@ -4,7 +4,7 @@
 https://movie-6161.web.app/
 
 ## Description
-**Using TheMovieDB API: **
+**Using TheMovieDB API:**
 
 https://www.themoviedb.org/documentation/api
 
