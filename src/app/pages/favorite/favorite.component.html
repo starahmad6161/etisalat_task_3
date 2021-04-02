@@ -1,0 +1,29 @@
+<div class="favorite mt-3">
+  <div class="container">
+    <div class="alert alert-info" *ngIf="favItems.length === 0">
+      No Favorite movies yet!
+    </div>
+    <table class="table text-white" *ngIf="favItems.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Poster Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let movie of favItems; trackBy:trackBy">
+          <th scope="row">{{ movie.id }}</th>
+          <td>
+            <img class="favorite__movieImg" [src]="'https://image.tmdb.org/t/p/w500/'+ movie.poster_path" [alt]="movie.title">
+          </td>
+          <td>{{ movie.title }}</td>
+          <td>
+            <div class="btn btn-danger" (click)="removeFav(movie.id)">Delete</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+.chat
+{
+  height: 90vh;
+  &__messages
+  {
+    height: 78%;
+  }
+  &__message
+  {
+    background-color: #9c27b0;
+    max-width: 250px;
+    &__username
+    {
+      color: #2d2d2d;
+    }
+    &::before
+    {
+      content: "";
+      position: absolute;
+      top: 0px;
+      left: 1px;
+      border-width: 5px 20px 20px 5px;
+      border-style: solid;
+      border-color: transparent #9c27b0 transparent transparent;
+      transform: translateX(-100%);
+    }
+    &--current
+    {
+      background-color: #e91e63;
+      &::before
+      {
+        right: 1px;
+        left: auto;
+        border-color: transparent transparent transparent #e91e63;
+        transform: translateX(100%);
+        border-width: 5px 5px 20px 20px;
+      }
+    }
+  }
+  &__form
+  {
+    height: 20%;
+    resize: none;
+  }
+}

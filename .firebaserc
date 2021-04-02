@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "movie-6161": {
+      "hosting": {
+        "movie": [
+          "movie-6161"
+        ]
+      }
+    }
+  }
+}

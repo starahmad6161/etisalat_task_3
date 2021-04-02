@@ -1,0 +1,37 @@
+
+
+<app-loading *ngIf="loading"></app-loading>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">Movie App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/chat" routerLinkActive="active" *ngIf="isLoggedIn">chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/favorite" routerLinkActive="active" *ngIf="isLoggedIn">Favorite</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="isLoggedIn && username">
+          <span class="nav-link">Hello {{ username }}</span>
+        </li>
+        <li class="nav-item pointer" (click)="logout()">
+          <span class="nav-link" *ngIf="isLoggedIn">logout</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  routerLink="/signup" routerLinkActive="active" *ngIf="!isLoggedIn">Signup</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,36 @@
+<app-loading *ngIf="loading"></app-loading>
+<div class="chat mt-2">
+  <div class="container h-100">
+    <div class="chat__messages bg-white mb-2 rounded overflow-auto px-2 py-2" #messagesEle>
+      <!--Message-->
+      <div class="alert alert-info" *ngIf="messages.length === 0">
+        no messages yet
+      </div>
+      <div class="chat__message text-white p-2 mb-2 position-relative"
+          [ngClass]="{
+            'ms-3': message.uId !== uId,
+            'ms-auto me-3': message.uId === uId
+          }"
+          [class.chat__message--current]="message.uId === uId"
+          *ngFor="let message of messages">
+        <div class="chat__message__username fw-bold">{{message?.username}}</div>
+        <div class="chat__message__body">{{message?.message}}</div>
+      </div>
+    </div>
+    <form #messageForm="ngForm" class="chat__form" (ngSubmit)="addMessage()">
+      <div class="input-group mb-3">
+        <textarea
+          class="form-control"
+          placeholder="Message"
+          name="userMessage"
+          [(ngModel)]="userMessage"
+          [class.is-invalid]="messageForm.controls.message?.touched && messageForm.controls.userMessage?.invalid"
+          required
+          ></textarea>
+        <span class="input-group-text bg-transparent p-0 border-0">
+          <button class="btn btn-success h-100" [disabled]="messageForm.invalid">Send</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

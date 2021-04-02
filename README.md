@@ -1,27 +1,51 @@
-# Movie
+# Angular Task
+## Online preview
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
+https://movie-6161.web.app/
 
-## Development server
+## GitHub repo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+https://github.com/starahmad6161/etisalat_task_3
 
-## Code scaffolding
+## Description
+**Using TheMovieDB API: **
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+https://www.themoviedb.org/documentation/api
+**Build a web app using the following:**
+- Angular
+- Firebase as a backend
 
-## Build
+**features required:**
+-  create account
+- login
+- view movies with a filter to toggle between (**top movies** - **upcoming movies** -  **now playing movies**).
+- view movie page (The movie card (UI) should include an action buttons to **comment, like, add/remove to favorite, and reply to a comment**)
+- for the favorite movies and comments...etc **(use local storage)**
+- favorite page (with remove feature)
+- simple chat with online users.
+**Please follow Angular best practices**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Technologies
+- Angular 11
+- SCSS
+- bootstrap 5 **(beta)**
 
-## Running unit tests
+## Project structure
+- **app**
+ - **core**
+   - guards
+   - services
+ - **pages**
+   - chat
+   - favorite
+   - home
+   - login
+   - signup
+   - movie
+   - not-found
+ - **shared**
+   - components
+   - header
+   - interfaces
+   - pips
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

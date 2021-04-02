@@ -1,0 +1,66 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div class="home">
+  <div class="container">
+    <div class="home__filterBar text-white p-3 my-3 rounded">
+      <div class="row">
+        <div class="col-md-4 ms-auto d-flex align-items-center">
+          Filter
+          <select #filterBy class="form-select mt-2 ms-2" (change)="loadMovies(filterBy.value)">
+            <option value="top_rated" selected>Top movies</option>
+            <option value="upcoming">Upcoming movies</option>
+            <option value="now_playing">Now playing movies</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="home__innerContent">
+      <div class="row align-content-stretch">
+        <!--Card #-->
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let movie of movies; trackBy:trackBy">
+          <div class="home__card rounded position-relative border-0 shadow overflow-hidden h-100">
+            <img class="home__card__img w-100 h-100 position-absolute smooth-3" [src]="'https://image.tmdb.org/t/p/w500/'+ movie.poster_path" alt="image">
+            <div class="home__card__overlay text-white position-relative px-3 py-4 smooth-3 h-100 d-flex flex-column">
+              <div>
+                <!--Card Head-->
+                <div class="row">
+                  <div class="col-8">
+                    <div class="home__card__genres d-flex flex-wrap rounded justify-content-center smooth-3">
+                      <span class="home__card__genre px-2 py-1 position-relative" *ngFor="let genre of movie.genre_ids">{{ genre | genre }}</span>
+                    </div>
+                    <div class="home__card__voteCount p-2 mt-3 rounded text-center smooth-3">
+                      vote count : {{ movie.vote_count }}
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="d-flex justify-content-between mb-3">
+                      <div class="home__card__like">
+                        <svg class="home__card__like smooth-3 home__card__like--solid pointer" (click)="removeLike(movie.id)" *ngIf="isLiked(movie.id)" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="thumbs-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"></path></svg>
+                        <svg class="home__card__like smooth-3 home__card__like--regular pointer" (click)="addLike(movie)" *ngIf="!isLiked(movie.id)" aria-hidden="true" focusable="false" data-prefix="far" data-icon="thumbs-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M466.27 286.69C475.04 271.84 480 256 480 236.85c0-44.015-37.218-85.58-85.82-85.58H357.7c4.92-12.81 8.85-28.13 8.85-46.54C366.55 31.936 328.86 0 271.28 0c-61.607 0-58.093 94.933-71.76 108.6-22.747 22.747-49.615 66.447-68.76 83.4H32c-17.673 0-32 14.327-32 32v240c0 17.673 14.327 32 32 32h64c14.893 0 27.408-10.174 30.978-23.95 44.509 1.001 75.06 39.94 177.802 39.94 7.22 0 15.22.01 22.22.01 77.117 0 111.986-39.423 112.94-95.33 13.319-18.425 20.299-43.122 17.34-66.99 9.854-18.452 13.664-40.343 8.99-62.99zm-61.75 53.83c12.56 21.13 1.26 49.41-13.94 57.57 7.7 48.78-17.608 65.9-53.12 65.9h-37.82c-71.639 0-118.029-37.82-171.64-37.82V240h10.92c28.36 0 67.98-70.89 94.54-97.46 28.36-28.36 18.91-75.63 37.82-94.54 47.27 0 47.27 32.98 47.27 56.73 0 39.17-28.36 56.72-28.36 94.54h103.99c21.11 0 37.73 18.91 37.82 37.82.09 18.9-12.82 37.81-22.27 37.81 13.489 14.555 16.371 45.236-5.21 65.62zM88 432c0 13.255-10.745 24-24 24s-24-10.745-24-24 10.745-24 24-24 24 10.745 24 24z"></path></svg>
+                      </div>
+                      <div class="home__card__fav text-end">
+                        <svg class="home__card__star smooth-3 home__card__star--solid pointer" (click)="removeFav(movie.id)" *ngIf="isFav(movie.id)" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
+                        <svg class="home__card__star smooth-3 home__card__star--regular pointer" (click)="addFav(movie)" *ngIf="!isFav(movie.id)" aria-hidden="true" focusable="false" data-prefix="far" data-icon="star"role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"></path></svg>
+                      </div>
+                    </div>
+                    <div class="home__card__vote d-flex align-items-center justify-content-center rounded px-2 py-3 fw-bold h5 my-0 smooth-3">
+                      {{ movie.vote_average }}
+                    </div>
+                  </div>
+                </div>
+                <ul class="home__card__listItems list-unstyled mt-3 mb-0 smooth-3">
+                  <li class="home__card__listItem py-2">date: {{ movie.release_date }}</li>
+                  <li class="home__card__listItem py-2">+18: {{ movie.adult ? "Yes" : "No"}}</li>
+                  <li class="home__card__listItem py-2">popularity: {{ movie.popularity }}</li>
+                </ul>
+              </div>
+              <a class="home__card__link text-white text-decoration-none d-block mt-auto" [routerLink]="['/movie', movie.id]" (click)="loading = true">
+                <h3 class="home__card__title h5 text-center smooth-3">{{ movie.title }}</h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

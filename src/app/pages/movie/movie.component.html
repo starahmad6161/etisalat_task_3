@@ -1,0 +1,66 @@
+
+<app-loading *ngIf="loading"></app-loading>
+
+
+
+<div class="movie mt-4">
+  <div class="container">
+    <!--Movie Details-->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <img class="movie__posterImg w-100 rounded" [src]="'https://image.tmdb.org/t/p/w500'+ movieDetails.poster_path" alt="image">
+      </div>
+      <div class="col-md-6 text-white">
+        <h1 class="movie__title h2">{{ movieDetails.title }}</h1>
+        <p class="movie__overview">
+          {{movieDetails.overview}}
+        </p>
+        <ul class="list-group list-unstyled list-group-flush mb-4">
+          <li class="movie__listItem list-group-item bg-transparent text-white">site : {{ movieDetails.homepage }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">date : {{ movieDetails.release_date }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">vote average : {{ movieDetails.vote_average }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">budget : {{ movieDetails.budget }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">popularity : {{ movieDetails.popularity }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">revenue : {{ movieDetails.revenue | currency}}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">status : {{ movieDetails.status }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">tagline : {{ movieDetails.tagline }}</li>
+          <li class="movie__listItem list-group-item bg-transparent text-white">vote count : {{ movieDetails.vote_count }}</li>
+        </ul>
+        <div class="d-flex">
+          <span class="movie__genre px-2 py-1 position-relative p-1 rounded-pill me-2" *ngFor="let genre of movieDetails.genres">  {{ genre.name }}</span>
+          <ng-template>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <!--Comments-->
+    <div class="movie__comments mt-3 bg-white rounded px-3 py-2">
+      <h2 class="movie__comments__title mb-3">All Comments</h2>
+      <!--Comment #1-->
+      <div class="alert alert-info mb-3" *ngIf="commentsList.length === 0">
+        No Comments Yet
+      </div>
+      <div class="movie__comment px-3 py-2 border-bottom" *ngFor="let comment of commentsList; trackBy:trackBy">
+        <h3 class="movie__comment__title fw-bold">{{ comment.username }}</h3>
+        <p class="movie__comment__desc">{{ comment.body }}</p>
+        <button class="btn movie__comment__reply px-2 py-1 border smooth-3 mb-3" [class.movie__comment__reply--cancel]="comment.show_reply " (click)="comment.show_reply= !comment.show_reply">{{ comment.show_reply ? "Cancel Reply" : "Reply"}}</button>
+        <app-reply (replyEvent)="reply($event)" [movieId]="movieDetails.id" [commentId]="comment.id" [replyTo]="comment.username" [replyIsOpen]="comment.show_reply" *ngIf="comment.show_reply"></app-reply>
+        <!--Reply-->
+        <div class="movie__comment ms-3 mb-3 ps-2" *ngFor="let reply of comment.replies">
+          <h4 class="movie__comment__title fw-bold">{{ reply.username }}</h4>
+          <p class="movie__comment__desc ps-2"> <span class="fw-bold">{{reply.replyTo}}</span> {{ reply.body }}</p>
+        </div>
+      </div>
+      <!--Form-->
+        <form #commentForm="ngForm" (ngSubmit)="addComment()">
+          <textarea class="form-control my-2"
+          [class.is-invalid]="commentForm.controls.comment?.touched && commentForm.controls.comment?.errors"
+          [(ngModel)]="comment"
+          name="comment" placeholder="Write your comment" required></textarea>
+          <div class="text-end">
+            <button class="btn btn-primary" [disabled]="commentForm.invalid">Add Comment</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

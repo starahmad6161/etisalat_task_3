@@ -1,0 +1,11 @@
+
+<div class="mt-2">
+  <form #replyForm="ngForm" (ngSubmit)="reply()">
+    <textarea class="form-control ms-3"
+    [class.is-invalid]="replyForm.controls.replyBody?.touched && replyForm.controls.replyBody?.errors"
+    [(ngModel)]="replyBody" name="replyBody" required></textarea>
+    <div class="text-end">
+      <button class="btn btn-success mt-2" [disabled]="replyForm.invalid">Add Reply</button>
+    </div>
+  </form>
+</div>

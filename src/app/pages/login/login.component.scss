@@ -1,0 +1,19 @@
+.login
+{
+  min-height: 90vh;
+  &__inner
+  {
+    max-width: 400px;
+
+  }
+  &__icon
+  {
+    height: 17px;
+    color: #444;
+  }
+}
+
+.alert
+{
+  font-size: .8rem;
+}

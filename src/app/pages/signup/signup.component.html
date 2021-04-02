@@ -1,0 +1,55 @@
+<div class="signup d-flex">
+  <div class="signup__inner m-auto bg-white px-4 py-3 rounded">
+    <h1 class="signup__title text-center mb-3">Signup</h1>
+    <form #ngForm="ngForm" [formGroup]="signupForm" (ngSubmit)="signup()">
+      <!--Username-->
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          <svg class="signup__icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path></svg>
+        </span>
+        <input type="text" formControlName="username" class="form-control" placeholder="Username">
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(username?.touched || ngForm.submitted) && username?.errors?.required">
+        Username Is Required
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(username?.touched || ngForm.submitted) && username?.errors?.pattern">
+        - Username should start with Uppercase character <br>
+        - Spaces not allowed
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(username?.touched || ngForm.submitted) && username?.errors?.minlength">
+        Username should be more than 3 char
+      </div>
+      <!--Email-->
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          <svg class="signup__icon" aria-hidden="true" focusable="false" data-prefix="far" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path></svg>
+        </span>
+        <input type="text" formControlName="email" class="form-control" placeholder="Email">
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(email?.touched || ngForm.submitted) && email?.errors?.required">
+        Email Is Required
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(email?.touched || ngForm.submitted) && email?.errors?.email">
+        Email Is Not Valid
+      </div>
+      <!--Password-->
+      <div class="input-group mb-3">
+        <span class="input-group-text">
+          <svg class="signup__icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="lock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M400 224h-24v-72C376 68.2 307.8 0 224 0S72 68.2 72 152v72H48c-26.5 0-48 21.5-48 48v192c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V272c0-26.5-21.5-48-48-48zm-104 0H152v-72c0-39.7 32.3-72 72-72s72 32.3 72 72v72z"></path></svg>
+        </span>
+        <input type="password" formControlName="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(password?.touched || ngForm.submitted) && password?.errors?.required">
+        Password Is Required
+      </div>
+      <div class="alert alert-danger p-2" *ngIf="(password?.touched || ngForm.submitted) && password?.errors?.minlength">
+        Password should be 6 char or more
+      </div>
+      <button class="btn btn-success w-100" [disabled]="signupForm.invalid || loading"> {{ loading ? 'loading...' : 'signup' }}</button>
+
+      <div class="alert alert-danger mt-3" *ngIf="errMsg">
+        {{ errMsg }}
+      </div>
+    </form>
+  </div>
+</div>

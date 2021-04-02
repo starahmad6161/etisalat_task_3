@@ -1,0 +1,33 @@
+.movie
+{
+  &__genre
+  {
+    background-color: #f74740;
+  }
+  &__comment
+  {
+    position: relative;
+    &::before
+    {
+      content: "";
+      width: 3px;
+      height: 80%;
+      background-color: #d2d2d2;
+      position: absolute;
+      left: 0px;
+      bottom: 5px;
+    }
+    &:hover::before
+    {
+      background-color: #b1b1b1;
+    }
+    &__reply
+    {
+      &--cancel,
+      &:hover
+      {
+        background-color: #ddd;
+      }
+    }
+  }
+}
