@@ -3,7 +3,7 @@
 
 https://movie-6161.web.app/
 
-## firebase name 
+## firebase project name 
 movie (movie-6161)
 
 ## Description
