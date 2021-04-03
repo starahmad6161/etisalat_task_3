@@ -32,20 +32,20 @@ https://www.themoviedb.org/documentation/api
 
 ## Project structure
 - **app**
- - **core**
-   - guards
-   - services
- - **pages**
-   - chat
-   - favorite
-   - home
-   - login
-   - signup
-   - movie
-   - not-found
- - **shared**
-   - components
-   - header
-   - interfaces
-   - pips
+  - **core**
+     - guards
+     - services
+   - **pages**
+     - chat
+     - favorite
+     - home
+     - login
+     - signup
+     - movie
+     - not-found
+   - **shared**
+     - components
+     - header
+     - interfaces
+     - pips
 
